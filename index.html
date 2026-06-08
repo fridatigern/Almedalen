@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F8651F">
+<title>Almedalen 2026 · Besöksnäring & matturism</title>
+<style>
+  :root{
+    --mon:#F8651F; --tue:#1B86C4; --wed:#0E9E78; --thu:#9B1B7A; --fri:#E0157E;
+    --ink:#241c2b; --paper:#fffdf7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:38px 20px 30px;
+    background:linear-gradient(135deg,#F8651F 0%,#E0157E 45%,#9B1B7A 75%,#1B86C4 100%);
+    color:#fff; text-align:center; position:relative; overflow:hidden;
+  }
+  .hero::after{content:"🍴🌅🎤";position:absolute;font-size:120px;opacity:.10;
+    right:-10px;top:-20px;letter-spacing:6px;pointer-events:none}
+  .hero h1{font-size:clamp(26px,7vw,40px);font-weight:800;letter-spacing:-.5px;line-height:1.1}
+  .hero p{margin-top:10px;font-size:15px;opacity:.95;max-width:520px;margin-left:auto;margin-right:auto}
+  .hero .meta{margin-top:14px;font-size:13px;font-weight:700;
+    background:rgba(255,255,255,.2);display:inline-block;padding:6px 14px;border-radius:999px}
+
+  /* ---------- Sticky day-nav ---------- */
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,253,247,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid #eee5d5;
+    display:flex;gap:8px;overflow-x:auto;padding:11px 14px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav a{flex:0 0 auto;text-decoration:none;font-weight:700;font-size:13px;
+    color:#fff;padding:8px 15px;border-radius:999px;white-space:nowrap;
+    box-shadow:0 2px 6px rgba(0,0,0,.12);transition:transform .12s}
+  nav a:active{transform:scale(.94)}
+  nav a.mon{background:var(--mon)} nav a.tue{background:var(--tue)}
+  nav a.wed{background:var(--wed)} nav a.thu{background:var(--thu)}
+  nav a.fri{background:var(--fri)}
+
+  /* ---------- Day sections ---------- */
+  .wrap{max-width:640px;margin:0 auto;padding:6px 16px 60px}
+  .day{margin-top:30px;scroll-margin-top:64px}
+  .day-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .day-badge{width:54px;height:54px;border-radius:16px;flex:0 0 auto;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:#fff;font-weight:800;line-height:1}
+  .day-badge .d{font-size:20px} .day-badge .m{font-size:10px;opacity:.9;margin-top:2px;text-transform:uppercase}
+  .day-title{font-size:22px;font-weight:800}
+  .day-sub{font-size:13px;color:#8a7f72;font-weight:600}
+
+  /* ---------- Cards ---------- */
+  .card{position:relative;background:#fff;border-radius:18px;padding:16px 16px 16px 20px;
+    margin-bottom:12px;box-shadow:0 3px 14px rgba(60,40,20,.07);
+    border:1px solid #f1ead8;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px}
+  .card.mon::before{background:var(--mon)} .card.tue::before{background:var(--tue)}
+  .card.wed::before{background:var(--wed)} .card.thu::before{background:var(--thu)}
+  .card.fri::before{background:var(--fri)}
+  .time{display:inline-block;font-weight:800;font-size:13px;color:#fff;
+    padding:4px 11px;border-radius:999px;margin-bottom:8px}
+  .card.mon .time{background:var(--mon)} .card.tue .time{background:var(--tue)}
+  .card.wed .time{background:var(--wed)} .card.thu .time{background:var(--thu)}
+  .card.fri .time{background:var(--fri)}
+  .time.multi{margin-right:5px}
+  .card h3{font-size:17px;font-weight:800;line-height:1.25;margin-bottom:9px}
+  .card h3 a{color:var(--ink);text-decoration:none}
+  .card h3 a:active{opacity:.6}
+  .row{display:flex;gap:8px;font-size:13.5px;color:#5b5249;margin-top:5px;align-items:flex-start}
+  .row .ico{flex:0 0 auto;font-size:14px;line-height:1.4}
+  .badge{display:inline-block;margin-top:11px;font-size:11.5px;font-weight:800;
+    color:#7a3b00;background:#ffe7b3;padding:5px 11px;border-radius:999px;letter-spacing:.2px}
+
+  /* ---------- Footer ---------- */
+  footer{max-width:640px;margin:0 auto;padding:0 18px 50px;color:#8a7f72;font-size:13px}
+  footer .note{background:#fff;border-radius:16px;padding:16px;box-shadow:0 3px 14px rgba(60,40,20,.06);line-height:1.55}
+  footer a{color:#9B1B7A;font-weight:700}
+  .legend{display:flex;align-items:center;gap:8px;margin:18px 0 8px;font-size:12.5px;font-weight:600;color:#5b5249}
+  .legend .badge{margin:0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Besöksnäring &amp; matturism</h1>
+  <p>Ditt komprimerade schema för Almedalsveckan i Visby</p>
+  <div class="meta">22–26 juni 2026 · Visby</div>
+</header>
+
+<nav>
+  <a class="mon" href="#mon">🌅 Mån</a>
+  <a class="tue" href="#tue">✈️ Tis</a>
+  <a class="wed" href="#wed">🏙️ Ons</a>
+  <a class="thu" href="#thu">🍴 Tor</a>
+  <a class="fri" href="#fri">🍯 Fre</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="legend">
+    <span class="badge">⭐ Matturism</span>
+    <span>= mat som besöksupplevelse</span>
+  </div>
+
+  <!-- MÅNDAG -->
+  <section class="day" id="mon">
+    <div class="day-head">
+      <div class="day-badge" style="background:var(--mon)"><span class="d">22</span><span class="m">jun</span></div>
+      <div><div class="day-title">Måndag</div><div class="day-sub">Invigningsdag</div></div>
+    </div>
+
+    <article class="card mon">
+      <span class="time">16.00–16.45</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/10333" target="_blank" rel="noopener">Gotland framåt – idéerna och människorna som driver utvecklingen</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Almedalens poddscen, S:t Hansgatan 47 (Gotlands bryggeri)</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Gotlands Bryggeri</span></div>
+    </article>
+  </section>
+
+  <!-- TISDAG -->
+  <section class="day" id="tue">
+    <div class="day-head">
+      <div class="day-badge" style="background:var(--tue)"><span class="d">23</span><span class="m">jun</span></div>
+      <div><div class="day-title">Tisdag</div><div class="day-sub">Resa &amp; transport</div></div>
+    </div>
+
+    <article class="card tue">
+      <span class="time">09.45–10.30</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/7566" target="_blank" rel="noopener">Varför bromsar svenskt inrikesflyg och när lyfter det hållbara flygresandet?</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Hansaplatsen Arena C, Donnersgatan 6</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Svenska Resebranschföreningen</span></div>
+    </article>
+
+    <article class="card tue">
+      <span class="time">10.00–10.45</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/8791" target="_blank" rel="noopener">Evenemangssektorns ekonomiska bidrag till samhällsekonomin</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Kultur i Almedalen, Bredgatan 10 (Länsteatern)</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Svensk Scenkonst, Svensk Live, Riksidrottsförbundet</span></div>
+    </article>
+
+    <article class="card tue">
+      <span class="time">10.45–11.45</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/7588" target="_blank" rel="noopener">Vilka är hindren som stoppar Sveriges tillväxt som rese- och turistland?</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Hansaplatsen Arena C, Donners plats 6</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Svenska Resebranschföreningen</span></div>
+    </article>
+
+    <article class="card tue">
+      <span class="time">16.00–16.45</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/9175" target="_blank" rel="noopener">Med fossilfri buss till de svenska fjällen</a></h3>
+      <div class="row"><span class="ico">📍</span><span>2030-arenan, Hästgatan 12</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Energigas Sverige</span></div>
+    </article>
+  </section>
+
+  <!-- ONSDAG -->
+  <section class="day" id="wed">
+    <div class="day-head">
+      <div class="day-badge" style="background:var(--wed)"><span class="d">24</span><span class="m">jun</span></div>
+      <div><div class="day-title">Onsdag</div><div class="day-sub">Destination &amp; tillväxt</div></div>
+    </div>
+
+    <article class="card wed">
+      <span class="time">11.00–11.45</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/7452" target="_blank" rel="noopener">EU:s nya turismagenda: Hur säkrar svensk besöksnäring sin plats på kartan?</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Svenskt Näringslivs trädgård, Hamngatan 3</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Visita</span></div>
+      <span class="badge">⭐ Matturism</span>
+    </article>
+
+    <article class="card wed">
+      <span class="time">13.30–14.15</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/9178" target="_blank" rel="noopener">Mod, kultur och kraften att forma Stockholm till en världsstad</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Samhällsbyggararenan, Hästgatan 4</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Stockholms stad</span></div>
+    </article>
+
+    <article class="card wed">
+      <span class="time">14.00–15.00</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/10399" target="_blank" rel="noopener">Var femte hushåll har en båt – dags för en Båtminister?</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Båtlivsarenan i hamnen, Hamnplan plats 223</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Båtliv Sverige</span></div>
+    </article>
+
+    <article class="card wed">
+      <span class="time">15.30–16.15</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/9180" target="_blank" rel="noopener">Hur avgörande är Stockholms identitet för att konkurrera som världsstad?</a></h3>
+      <div class="row"><span class="ico">📍</span><span>Samhällsbyggararenan, Hästgatan 4</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Stockholms stad</span></div>
+    </article>
+  </section>
+
+  <!-- TORSDAG -->
+  <section class="day" id="thu">
+    <div class="day-head">
+      <div class="day-badge" style="background:var(--thu)"><span class="d">25</span><span class="m">jun</span></div>
+      <div><div class="day-title">Torsdag</div><div class="day-sub">Matturismens dag 🍴</div></div>
+    </div>
+
+    <article class="card thu">
+      <span class="time multi">09.30</span><span class="time multi">10.15</span><span class="time multi">11.00</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/7396" target="_blank" rel="noopener">Ett handslag för tillväxt: Nu sätter vi besöksnäringen på menyn</a></h3>
+      <div class="row"><span class="ico">🍳</span><span>Kockduellen – tre debattslots, ledande politiker möts i grytan</span></div>
+      <div class="row"><span class="ico">📍</span><span>Svenskt Näringslivs trädgård, Hamngatan 3</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Visita</span></div>
+      <span class="badge">⭐ Matturism</span>
+    </article>
+
+    <article class="card thu">
+      <span class="time">10.00–15.00</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemang-almedalsveckan/2026/8154" target="_blank" rel="noopener">Gillar alla allemansrätten och kolbullar?</a></h3>
+      <div class="row"><span class="ico">🔥</span><span>Kolbulle-träff vid lägerelden med politiker</span></div>
+      <div class="row"><span class="ico">📍</span><span>Grillplatsen på Strandpromenaden, Studentallén 6</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Svenska Turistföreningen</span></div>
+      <span class="badge">⭐ Matturism</span>
+    </article>
+  </section>
+
+  <!-- FREDAG -->
+  <section class="day" id="fri">
+    <div class="day-head">
+      <div class="day-badge" style="background:var(--fri)"><span class="d">26</span><span class="m">jun</span></div>
+      <div><div class="day-title">Fredag</div><div class="day-sub">Lokala smaker</div></div>
+    </div>
+
+    <article class="card fri">
+      <span class="time">13.00–15.00</span>
+      <h3><a href="https://gotland.se/rg/almedalsveckan/evenemangalmedalsveckan/2026/6997.4.39f5284a19c987ae6ba8221b.html" target="_blank" rel="noopener">Äkta honung – skapar en schysstare värld</a></h3>
+      <div class="row"><span class="ico">🍯</span><span>Smakprovning av lokal gotländsk honung</span></div>
+      <div class="row"><span class="ico">📍</span><span>Cramérgatan plats 321</span></div>
+      <div class="row"><span class="ico">🎤</span><span>Gotlands biodlardistrikt, SBR</span></div>
+      <span class="badge">⭐ Matturism</span>
+    </article>
+  </section>
+
+</div>
+
+<footer>
+  <div class="note">
+    <strong>Om urvalet:</strong> Passen är hämtade ur Almedalsveckans officiella program, ämneskategorierna
+    <em>Besöksnäring</em> och <em>Mat</em>. Övriga Mat-pass handlar mest om livsmedelsberedskap och matpolitik,
+    inte matturism, och är därför inte med här.<br><br>
+    Tryck på en rubrik för att öppna passet i programmet.<br><br>
+    📲 Spara sidan på hemskärmen: öppna i Safari, tryck på Dela-knappen och välj
+    <strong>Lägg till på hemskärmen</strong>.<br><br>
+    Källa: <a href="https://almedalsveckan.info/rg/almedalsveckan/officiellt-program/program-2026" target="_blank" rel="noopener">almedalsveckan.info</a>
+  </div>
+</footer>
+
+</body>
+</html>
