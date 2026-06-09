@@ -80,6 +80,13 @@
   .row .ico{flex:0 0 auto;font-size:14px;line-height:1.4}
   .badge{display:inline-block;margin-top:11px;font-size:11.5px;font-weight:800;
     color:#7a3b00;background:#ffe7b3;padding:5px 11px;border-radius:999px;letter-spacing:.2px}
+  .tag-mine{display:inline-block;margin-left:6px;font-size:11px;font-weight:800;color:#5b2a86;
+    background:#ede4ff;padding:3px 10px;border-radius:999px;vertical-align:middle}
+  .status{display:inline-block;margin-top:12px;border:none;cursor:pointer;font-weight:800;font-size:13px;
+    padding:8px 16px;border-radius:999px;font-family:inherit;-webkit-tap-highlight-color:transparent}
+  .status.booked{background:#19a463;color:#fff}
+  .status.applied{background:#ffd27a;color:#7a4d00}
+  .status-hint{font-size:11px;color:#9a8f80;margin-top:5px}
 
   /* ---------- Footer ---------- */
   footer{max-width:640px;margin:0 auto;padding:0 18px 50px;color:#8a7f72;font-size:13px}
@@ -205,6 +212,22 @@
       <div class="row"><span class="ico">📍</span><span>Livsmedelsdagen, Klosterbrunnsgatan 3</span></div>
       <div class="row"><span class="ico">🎤</span><span>Livsmedelsföretagen, Lantbrukarnas Riksförbund (LRF)</span></div>
     </article>
+
+    <article class="card tue">
+      <span class="time">18.00</span><span class="tag-mine">🥂 Mingel</span>
+      <h3>Livsmedelsdagarnas mingel</h3>
+      <div class="row"><span class="ico">📍</span><span>Livsmedelsdagen, Klosterbrunnsgatan 3</span></div>
+      <button class="status applied" data-key="livsmedel-mingel" onclick="toggleStatus(this)">📨 Ansökt</button>
+      <div class="status-hint">Tryck för att växla Bokad/Ansökt</div>
+    </article>
+
+    <article class="card tue">
+      <span class="time">19.15</span><span class="tag-mine">🍽️ Middag</span>
+      <h3>Middag på Supper</h3>
+      <div class="row"><span class="ico">📍</span><span>Restaurang Supper, Strandgatan 9, 621 56 Visby</span></div>
+      <button class="status booked" data-key="supper-middag" onclick="toggleStatus(this)">✅ Bokad</button>
+      <div class="status-hint">Tryck för att växla Bokad/Ansökt</div>
+    </article>
   </section>
 
   <!-- ONSDAG -->
@@ -242,6 +265,13 @@
       <div class="row"><span class="ico">📍</span><span>Samhällsbyggararenan, Hästgatan 4</span></div>
       <div class="row"><span class="ico">🎤</span><span>Stockholms stad</span></div>
     </article>
+
+    <article class="card wed">
+      <span class="time">19.00</span><span class="tag-mine">🥂 Mingel</span>
+      <h3>Stordalens mingel</h3>
+      <button class="status booked" data-key="stordalen-mingel" onclick="toggleStatus(this)">✅ Bokad</button>
+      <div class="status-hint">Tryck för att växla Bokad/Ansökt</div>
+    </article>
   </section>
 
   <!-- TORSDAG -->
@@ -267,6 +297,13 @@
       <div class="row"><span class="ico">📍</span><span>Grillplatsen på Strandpromenaden, Studentallén 6</span></div>
       <div class="row"><span class="ico">🎤</span><span>Svenska Turistföreningen</span></div>
       <span class="badge">⭐ Matturism</span>
+    </article>
+
+    <article class="card thu">
+      <span class="time">19.00</span><span class="tag-mine">🥂 Mingel</span>
+      <h3>Techarena mingel</h3>
+      <button class="status applied" data-key="techarena-mingel" onclick="toggleStatus(this)">📨 Ansökt</button>
+      <div class="status-hint">Tryck för att växla Bokad/Ansökt</div>
     </article>
   </section>
 
@@ -295,11 +332,31 @@
     <em>Besöksnäring</em> och <em>Mat</em>. Övriga Mat-pass handlar mest om livsmedelsberedskap och matpolitik,
     inte matturism, och är därför inte med här.<br><br>
     Tryck på en rubrik för att öppna passet i programmet.<br><br>
+    Dina egna bokningar (mingel och middag) har en knapp där du växlar mellan Bokad och Ansökt. Ditt val sparas i din telefon.<br><br>
     📲 Spara sidan på hemskärmen: öppna i Safari, tryck på Dela-knappen och välj
     <strong>Lägg till på hemskärmen</strong>.<br><br>
     Källa: <a href="https://almedalsveckan.info/rg/almedalsveckan/officiellt-program/program-2026" target="_blank" rel="noopener">almedalsveckan.info</a>
   </div>
 </footer>
+
+<script>
+  function setState(btn,state){
+    if(state==='booked'){btn.classList.add('booked');btn.classList.remove('applied');btn.textContent='✅ Bokad';}
+    else{btn.classList.add('applied');btn.classList.remove('booked');btn.textContent='📨 Ansökt';}
+  }
+  function toggleStatus(btn){
+    var cur=btn.classList.contains('booked')?'booked':'applied';
+    var next=cur==='booked'?'applied':'booked';
+    setState(btn,next);
+    try{localStorage.setItem('alm-status-'+btn.dataset.key,next);}catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.status').forEach(function(btn){
+      var saved=null; try{saved=localStorage.getItem('alm-status-'+btn.dataset.key);}catch(e){}
+      if(saved){setState(btn,saved);}
+    });
+  });
+</script>
 
 </body>
 </html>
